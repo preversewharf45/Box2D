@@ -1,6 +1,41 @@
 -- Box2D premake5 script.
 -- https://premake.github.io/
 
+project "Box2D"
+    kind "StaticLib"
+    language "C++"
+    cppdialect "C++17"
+	staticruntime "On"
+    
+	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputDir .. "/%{prj.name}")
+
+	files { 'Box2D/**' }
+	
+	includedirs { '.' }
+    
+	filter "system:windows"
+        systemversion "latest"
+		defines { '_CRT_SECURE_NO_WARNINGS' }
+	
+	filter "configurations:Debug"
+		runtime "Debug"
+		symbols "on"
+		defines { 'DEBUG' }
+	
+	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"
+		defines { 'NDEBUG' }
+	
+	filter "configurations:Distribute"
+		runtime "Release"
+		optimize "on"
+		defines { 'NDEBUG' }
+
+
+--[[ Original Premake Content
+
 workspace 'Box2D'
 	configurations { 'Debug', 'Release' }
 	startproject 'Testbed'
@@ -146,3 +181,5 @@ project 'Testbed'
 		}
 	
 	filter {}
+
+]]--
