@@ -22,6 +22,11 @@
 #include "Box2D/Common/b2Settings.h"
 #include <math.h>
 
+#ifdef PREVMATH
+#include "../../../../src/math/vec2.h"
+#include "../../../../src/math/vec3.h"
+#endif
+
 /// This function is used to ensure that a floating point number is not a NaN or infinity.
 inline bool b2IsValid(float32 x)
 {
@@ -34,6 +39,12 @@ inline bool b2IsValid(float32 x)
 /// A 2D column vector.
 struct b2Vec2
 {
+	/// --------------------------------------------------
+	#ifdef PREVMATH
+	b2Vec2(const prev::Vec2 _vec) : x(_vec.x), y(_vec.y) {}
+	#endif
+	/// --------------------------------------------------
+
 	/// Default constructor does nothing (for performance).
 	b2Vec2() {}
 
@@ -125,6 +136,13 @@ struct b2Vec2
 /// A 2D column vector with 3 elements.
 struct b2Vec3
 {
+
+	/// --------------------------------------------------
+	#ifdef PREVMATH
+	b2Vec3(const prev::Vec3 _vec) : x(_vec.x), y(_vec.y), z(_vec.z) {}
+	#endif
+	/// --------------------------------------------------
+
 	/// Default constructor does nothing (for performance).
 	b2Vec3() {}
 
